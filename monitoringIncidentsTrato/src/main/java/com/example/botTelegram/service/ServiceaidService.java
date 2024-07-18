@@ -36,11 +36,11 @@ public class ServiceaidService {
         String json = response.getBody();
 
         Gson gson = new Gson();
-        Return data = gson.fromJson(json, Return.class);
+        Return returno = gson.fromJson(json, Return.class);
 
         // Processar a resposta conforme necessário
-        System.out.println(data);
+//        System.out.println(returno);
 
-        return json;
+        return String.valueOf(returno.data().items().get(0).TicketIdentifier());
     }
 }

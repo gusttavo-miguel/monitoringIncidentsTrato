@@ -10,6 +10,8 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 // Back-end do bot
 public class Bot extends TelegramLongPollingBot {
@@ -47,43 +49,30 @@ public class Bot extends TelegramLongPollingBot {
         var textMessage = update.getMessage().getText().toLowerCase();
         var chatId = update.getMessage().getChatId().toString();
 
-        String[] response = new String[0];
+        ServiceaidService ServiceaidService = new ServiceaidService();
+        var retorno = "";
 
-        if(textMessage.equals("start")){
-            ServiceaidService ServiceaidService = new ServiceaidService();
-            response  = new String[]{ServiceaidService.getIncidents()};
-        }
+        retorno = switch (textMessage) {
+            case "oi" -> """
+                    Olá!, eu sou um bot!
 
-//        var response = switch (textMessage) {
-//            case "oi" ->  """
-//                    Olá!, eu sou um bot!
-//
-//                    O que você deseja ?
-//                    1 - Buscar incidents
-//                    2 - Saber a data atual
-//                    3 - Saber a hora atual
-//                    """;
-//            case "1" -> REST.getIncidents();
-//            case "2" -> getData();
-//            case "3" -> getHora();
-//            default -> "utilize um dos comandos:\n1 - Saber a data atual\n2 - Saber a hora atual\n";
-//        };
+                    O que você deseja ?
+                    1 - Monitorar incidents
+                    2 - Saber a data atual
+                    3 - Saber a hora atual
+                    """;
+            case "1" -> ServiceaidService.getIncidents();
+            case "2" -> getData();
+            case "3" -> getHora();
+            default -> "utilize um dos comandos:\n1 - Saber a data atual\n2 - Saber a hora atual\n";
+        };
 
         return SendMessage.builder()
-                .text(Arrays.toString(response))
+                .text(retorno)
                 .chatId(chatId)
                 .build();
     }
 
-    public String getIncidents() {
-
-        var formatter = new SimpleDateFormat("HH:mm:ss");
-        return "A hora atual é: " + formatter.format(new Date());
-
-
-
-
-    }
 
     public String getData() {
         var formatter = new SimpleDateFormat("dd/MM/yyyy");
