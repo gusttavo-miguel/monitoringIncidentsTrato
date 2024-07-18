@@ -1,17 +1,18 @@
 package com.example.botTelegram.service;
 
-import com.example.botTelegram.pojo.Ticket;
+import com.example.botTelegram.newPojo.Return;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-public class REST {
+public class ServiceaidService {
 
-    private final String apiUrl = "https://csm3.serviceaide.com/csmconnector/Ticket/300-4249"; // Substitua pela URL da API
+//    private final String apiUrl = "https://csm3.serviceaide.com/csmconnector/Ticket/300-4249";
+    private final String apiUrl = "https://csm3.serviceaide.com/csmconnector/Ticket"; // Substitua pela URL da API
 
     public String getIncidents() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
@@ -34,12 +35,11 @@ public class REST {
 
         String json = response.getBody();
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        Ticket ticket = objectMapper.readValue(json, Ticket.class);
-
+        Gson gson = new Gson();
+        Return data = gson.fromJson(json, Return.class);
 
         // Processar a resposta conforme necessário
-        System.out.println(ticket.getTicketIdentifier());
+        System.out.println(data);
 
         return json;
     }
