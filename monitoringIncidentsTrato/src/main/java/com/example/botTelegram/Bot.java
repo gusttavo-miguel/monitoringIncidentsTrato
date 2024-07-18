@@ -1,6 +1,6 @@
 package com.example.botTelegram;
 
-import com.example.botTelegram.service.REST;
+import com.example.botTelegram.service.ServiceaidService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -50,8 +50,8 @@ public class Bot extends TelegramLongPollingBot {
         String[] response = new String[0];
 
         if(textMessage.equals("start")){
-            REST REST = new REST();
-            response  = new String[]{REST.getIncidents()};
+            ServiceaidService ServiceaidService = new ServiceaidService();
+            response  = new String[]{ServiceaidService.getIncidents()};
         }
 
 //        var response = switch (textMessage) {
