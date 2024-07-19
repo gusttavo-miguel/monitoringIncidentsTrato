@@ -30,9 +30,9 @@ public class Bot extends TelegramLongPollingBot {
     public void onUpdateReceived(Update update) {
 
         if (update.hasMessage() && update.getMessage().hasText()) {
-            SendMessage response = null; // envia a mensagem do usário ao método toRespond, que neste código, é responável pelo processamento das ações do bot
+            SendMessage response = null;
             try {
-                response = toRespond(update);
+                response = toRespond(update); // envia a mensagem do usário ao método toRespond, que neste código, é responável pelo processamento das ações do bot
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
@@ -52,35 +52,31 @@ public class Bot extends TelegramLongPollingBot {
         ServiceaidService ServiceaidService = new ServiceaidService();
         var retorno = "";
 
-        retorno = switch (textMessage) {
-            case "oi" -> """
-                    Olá!, eu sou um bot!
+        if (textMessage.equalsIgnoreCase("start")) {
+            retorno = ServiceaidService.getIncidents();
+        }
 
-                    O que você deseja ?
-                    1 - Monitorar incidents
-                    2 - Saber a data atual
-                    3 - Saber a hora atual
-                    """;
-            case "1" -> ServiceaidService.getIncidents();
-            case "2" -> getData();
-            case "3" -> getHora();
-            default -> "utilize um dos comandos:\n1 - Saber a data atual\n2 - Saber a hora atual\n";
-        };
 
         return SendMessage.builder()
                 .text(retorno)
                 .chatId(chatId)
                 .build();
-    }
 
 
-    public String getData() {
-        var formatter = new SimpleDateFormat("dd/MM/yyyy");
-        return "A data atual é: " + formatter.format(new Date());
-    }
+        //        retorno = switch (textMessage) {
+//            case "oi" -> """
+//                    Olá!, eu sou um bot!
+//
+//                    O que você deseja ?
+//                    1 - Monitorar incidents
+//                    2 - Saber a data atual
+//                    3 - Saber a hora atual
+//                    """;
+//            case "1" -> ServiceaidService.getIncidents();
+//            case "2" -> getData();
+//            case "3" -> getHora();
+//            default -> "utilize um dos comandos:\n1 - Saber a data atual\n2 - Saber a hora atual\n";
+//        };
 
-    public String getHora() {
-        var formatter = new SimpleDateFormat("HH:mm:ss");
-        return "A hora atual é: " + formatter.format(new Date());
     }
 }
