@@ -27,7 +27,7 @@ public class Bot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
-        // Aqui você pode adicionar lógica para tratar mensagens recebidas ( se necessário )
+        // Lógica para tratar mensagens recebidas ( se necessário )
     }
 
     public void sendMessage(String chatId, String text) {

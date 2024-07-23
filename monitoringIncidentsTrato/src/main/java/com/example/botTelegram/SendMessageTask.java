@@ -37,7 +37,7 @@ public class SendMessageTask implements Runnable {
         SendMessageTask task = new SendMessageTask(bot, RobotData.CHAT_ID);
 
         long initialDelay = 0L; // atraso inicial
-        long period = 20L; // período de 10 minutos
+        long period = 20L; // período de 20 minutos
 
         scheduler.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.MINUTES);
     }

@@ -14,7 +14,6 @@ public class ServiceaidService {
     public String getIncidents() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
 
-
         HttpHeaders headers = new HttpHeaders();
         headers.set("csm_app_url", "https://csm3.serviceaide.com");
         headers.set("user_auth_token", "apiusertokenslicetoken40285");
@@ -35,13 +34,24 @@ public class ServiceaidService {
         StringBuilder messageBuilder = new StringBuilder();
         messageBuilder.append("\uD83E\uDD16 Incident Monitoring Bot\n");
         if (returnData != null) {
-            messageBuilder.append("⚠\uFE0F Novo chamado(s) ativo(s) identificado(s)! ⚠\uFE0F\n");
+
+            if (returnData.data().items().size() > 1) {
+                messageBuilder.append("⚠\uFE0F Chamados ativos identificados! ⚠\uFE0F\n");
+            } else {
+                messageBuilder.append("⚠\uFE0F Chamado ativo identificado! ⚠\uFE0F\n");
+            }
+
             for (var item : returnData.data().items()) {
                 String ticketIdentifier = item.TicketIdentifier();
                 String ticketStatus = item.TicketStatus();
                 String description = item.Description();
+                String creationUserName = item.CreationUserName();
 
-                messageBuilder.append("\n\n").append("Número do chamado: ").append(ticketIdentifier).append("\n").append("Status: ").append(ticketStatus).append("\n").append("Descrição: ").append(description).append("\n----------------------------------------------------------------");
+                messageBuilder.append("\n").append("Número do chamado: ").append(ticketIdentifier).append("\n")
+                        .append("Status: ").append(ticketStatus).append("\n")
+                        .append("Solicitante: ").append(creationUserName).append("\n")
+                        .append("Descrição: ").append(description)
+                        .append("\n___________________________________________________________________");
             }
         } else {
             messageBuilder.append("Não foram identificados chamados recentes ativos!!");
