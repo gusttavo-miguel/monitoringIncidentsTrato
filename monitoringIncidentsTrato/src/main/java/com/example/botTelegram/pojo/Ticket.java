@@ -1,141 +1,135 @@
 package com.example.botTelegram.pojo;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
-@Data
-@JsonIgnoreProperties(ignoreUnknown = true)
-public class Ticket {
-
-    private String CreationTimestam;
-    private String Impact;
-    private String ActionId;
-    private String AffectedService;
-    private String AffectedServiceID;
-    private String ApprovalList;
-    private String AssignedCaseID;
-    private String AssignedID;
-    private String AssignedIndividual;
-    private String AssignedIndividualExternalUserID;
-    private String AssignedIndividualID;
-    private String AssignedTo;
-    private String AutomatedFullfillmentDetailFields;
-    private String AutomationWFExecuteMode;
-    private String CasaWorkflowExecuteOnActionId;
-    private String CasaWorkflowInitiated;
-    private String Categorization;
-    private String CategorizationCategory;
-    private String CategorizationClass;
-    private String CategorizationID;
-    private String CategorizationItem;
-    private String CategorizationItems;
-    private String CategorizationType;
-    private String ClientViewable;
-    private String ClosedDateTimestamp;
-    private String ClosedGroupID;
-    private String ClosedGroupName;
-    private String ClosedUserName;
-    private String CreationById;
-    private String CreationGroupID;
-    private String OverrideAutoRouting;
-    private String ProcessFlowID;
-    private String ProcessFlowIDStatus;
-    private String ProcessGUIFlowID;
-    private String ReadOnlyMsg;
-    private String ReasonCode;
-    private String RequestCatalogAttachmentId;
-    private String RequestCatalogId;
-    private String RequestCatalogName;
-    private String RequestCatalogWorkflowId;
-    private String RequestedForAltEmail;
-    private String RequestedForAltPhone;
-    private String RequestedForExternalUserID;
-    private String RequestedForID;
-    private String RequestedForOrgHierarchicalPath;
-    private String RequestedForOrgLevel;
-    private String RequestedForOrgName;
-    private String RequestedForRootOrgId;
-    private String RequestedForRootOrgName;
-    private String RequestedForUserID;
-    private String RequestedForUserName;
-    private String RequestedForVIPFlag;
-    private String RequestedOrgID;
-    private String RequesterAltEmail;
-    private String RequesterAltPhone;
-    private String RequesterExternalUserID;
-    private String RequesterID;
-    private String RequesterOrgHierarchicalPath;
-    private String RequesterOrgID;
-    private String RequesterOrgLevel;
-    private String RequesterOrgName;
-    private String RequesterRootOrgId;
-    private String RequesterRootOrgName;
-    private String RequesterUserID;
-    private String RequesterUserName;
-    private String RequesterUserNameWithVIPFlag;
-    private String RequesterVIPFlag;
-    private String RequiresCabApproval;
-    private String ResolvedDateTimestamp;
-    private String ResolvedGroupID;
-    private String ResolvedGroupName;
-    private String ResolvedUserName;
-    private String SendWorklogEmail;
-    private String SLAComplianceStatus;
-    private String SLADueTimestamp;
-    private String SLAHolidayID;
-    private String SLAResolveByTimestamp;
-    private String SLAStartDate;
-    private String SLATimezoneID;
-    private String SourceCode;
-    private String SupportEmailAddress;
-    private String TenantId;
-    private String TicketAging;
-    private String TicketImagePath;
-    private String TicketStatus;
-    private String TicketTypeId;
-    private String TotalTimeSpent;
-    private String TranslatedSLAComplianceStatus;
-    private String TranslatedTypeName;
-    private String TwoRequests;
-    private String TypeName;
-    private String Urgency;
-    private String UrgencyCode;
-    private String WallTicketType;
-    private String WorkActualDate;
-    private String WorkDescription;
-    private String WorklogActualDate;
-    private String WorkTimeSpent;
-    private String WorkType;
-    private String WorkTypeCode;
-    private String Source;
-    private String Phase;
-    private String Description;
-    private String MdrElementID;
-    private String TicketIdentifier;
-    private String PriorityCode;
-    private String CreationGroupName;
-    private String CreationUserName;
-    private String CustomFields;
-    private String DescriptionLong;
-    private String ExternalID;
-    private String GlobalRelationshipType;
-    private String HasAttachments;
-    private String ImpactCode;
-    private String IsArchived;
-    private String IsReadOnly;
-    private String LastModGroupID;
-    private String LastModGroupName;
-    private String LastModTimestamp;
-    private String LastModUserName;
-    private String LastWorklog;
-    private String LastWorklogDate;
-    private String LockedByExternalUserId;
-    private String LockedByUsername;
-    private String MetricKeysThrottled;
-    private String NonTranslatedTicketStatus;
-    private String OrgStatus;
-    private String AssignedContactID;
-    private String AssignedGroupID;
-    private String AssignedGroup;
-    private String Priority;
-}
+public record Ticket(
+        String CreationTimestam,
+        String Impact,
+        String ActionId,
+        String AffectedService,
+        String AffectedServiceID,
+        String ApprovalList,
+        String AssignedCaseID,
+        String AssignedID,
+        String AssignedIndividual,
+        String AssignedIndividualExternalUserID,
+        String AssignedIndividualID,
+        String AssignedTo,
+        String AutomatedFullfillmentDetailFields,
+        String AutomationWFExecuteMode,
+        String CasaWorkflowExecuteOnActionId,
+        String CasaWorkflowInitiated,
+        String Categorization,
+        String CategorizationCategory,
+        String CategorizationClass,
+        String CategorizationID,
+        String CategorizationItem,
+        String CategorizationItems,
+        String CategorizationType,
+        String ClientViewable,
+        String ClosedDateTimestamp,
+        String ClosedGroupID,
+        String ClosedGroupName,
+        String ClosedUserName,
+        String CreationById,
+        String CreationGroupID,
+        String OverrideAutoRouting,
+        String ProcessFlowID,
+        String ProcessFlowIDStatus,
+        String ProcessGUIFlowID,
+        String ReadOnlyMsg,
+        String ReasonCode,
+        String RequestCatalogAttachmentId,
+        String RequestCatalogId,
+        String RequestCatalogName,
+        String RequestCatalogWorkflowId,
+        String RequestedForAltEmail,
+        String RequestedForAltPhone,
+        String RequestedForExternalUserID,
+        String RequestedForID,
+        String RequestedForOrgHierarchicalPath,
+        String RequestedForOrgLevel,
+        String RequestedForOrgName,
+        String RequestedForRootOrgId,
+        String RequestedForRootOrgName,
+        String RequestedForUserID,
+        String RequestedForUserName,
+        String RequestedForVIPFlag,
+        String RequestedOrgID,
+        String RequesterAltEmail,
+        String RequesterAltPhone,
+        String RequesterExternalUserID,
+        String RequesterID,
+        String RequesterOrgHierarchicalPath,
+        String RequesterOrgID,
+        String RequesterOrgLevel,
+        String RequesterOrgName,
+        String RequesterRootOrgId,
+        String RequesterRootOrgName,
+        String RequesterUserID,
+        String RequesterUserName,
+        String RequesterUserNameWithVIPFlag,
+        String RequesterVIPFlag,
+        String RequiresCabApproval,
+        String ResolvedDateTimestamp,
+        String ResolvedGroupID,
+        String ResolvedGroupName,
+        String ResolvedUserName,
+        String SendWorklogEmail,
+        String SLAComplianceStatus,
+        String SLADueTimestamp,
+        String SLAHolidayID,
+        String SLAResolveByTimestamp,
+        String SLAStartDate,
+        String SLATimezoneID,
+        String SourceCode,
+        String SupportEmailAddress,
+        String TenantId,
+        String TicketAging,
+        String TicketImagePath,
+        String TicketStatus,
+        String TicketTypeId,
+        String TotalTimeSpent,
+        String TranslatedSLAComplianceStatus,
+        String TranslatedTypeName,
+        String TwoRequests,
+        String TypeName,
+        String Urgency,
+        String UrgencyCode,
+        String WallTicketType,
+        String WorkActualDate,
+        String WorkDescription,
+        String WorklogActualDate,
+        String WorkTimeSpent,
+        String WorkType,
+        String WorkTypeCode,
+        String Source,
+        String Phase,
+        String Description,
+        String MdrElementID,
+        String TicketIdentifier,
+        String PriorityCode,
+        String CreationGroupName,
+        String CreationUserName,
+        String CustomFields,
+        String DescriptionLong,
+        String ExternalID,
+        String GlobalRelationshipType,
+        String HasAttachments,
+        String ImpactCode,
+        String IsArchived,
+        String IsReadOnly,
+        String LastModGroupID,
+        String LastModGroupName,
+        String LastModTimestamp,
+        String LastModUserName,
+        String LastWorklog,
+        String LastWorklogDate,
+        String LockedByExternalUserId,
+        String LockedByUsername,
+        String MetricKeysThrottled,
+        String NonTranslatedTicketStatus,
+        String OrgStatus,
+        String AssignedContactID,
+        String AssignedGroupID,
+        String AssignedGroup,
+        String Priority)
+{}
