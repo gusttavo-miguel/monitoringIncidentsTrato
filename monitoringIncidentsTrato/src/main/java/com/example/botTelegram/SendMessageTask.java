@@ -24,13 +24,17 @@ public class SendMessageTask implements Runnable {
     @Override
     public void run() {
         ServiceaidService serviceaidService = new ServiceaidService();
-        String reponse;
+        String response;
+
         try {
-            reponse = serviceaidService.getIncidents();
+            response = serviceaidService.getIncidents();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        bot.sendMessage(chatId, reponse);
+
+        if (!response.isEmpty()){
+            bot.sendMessage(chatId, response);
+        }
     }
 
 //    @Override
