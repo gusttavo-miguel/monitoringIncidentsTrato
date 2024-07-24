@@ -40,7 +40,7 @@ public class ServiceaidService {
 
         if (!returnData.data().items().isEmpty()) {
 
-            messageBuilder.append("\uD83E\uDD16 Incident Monitoring Bot\n");
+            messageBuilder.append("\uD83E\uDD16 ").append("Incident Monitoring Bot\n");
 
             int cont = 0;
             for (var item : returnData.data().items()) {
