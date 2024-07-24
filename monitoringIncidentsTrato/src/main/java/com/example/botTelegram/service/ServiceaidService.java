@@ -1,6 +1,8 @@
 package com.example.botTelegram.service;
 
 import com.example.botTelegram.pojo.Return;
+import com.example.botTelegram.utis.RemoveJsonObject;
+import com.example.botTelegram.utis.serviceaideData.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import org.springframework.http.HttpHeaders;
@@ -13,33 +15,41 @@ public class ServiceaidService {
 
     public String getIncidents() throws JsonProcessingException {
         RestTemplate restTemplate = new RestTemplate();
+        Credentials credentials = new Credentials();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("csm_app_url", "https://csm3.serviceaide.com");
-        headers.set("user_auth_token", "apiusertokenslicetoken40285");
-        headers.set("slice_token", "VbxiZZ1IpsGe5T7L_l.t-Ho68629aCgt");
-        headers.set("webservice_user_name", "wsIncidentes@serviceaide.trato");
-        headers.set("webservice_user_password", "vD7@6!Hcx1");
+        headers.set("csm_app_url", credentials.getCSM_APP_URL());
+        headers.set("user_auth_token", credentials.getUSER_AUTH_TOKEN());
+        headers.set("slice_token", credentials.getSLICE_TOKEN());
+        headers.set("webservice_user_name", credentials.getWEBSERVICE_USER_NAME());
+        headers.set("webservice_user_password", credentials.getWEBSERVICE_USER_PASSWORD());
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        String apiUrl = "https://csm3.serviceaide.com/csmconnector/Ticket?filter=((NonTranslatedTicketStatus ne 'Archive' and NonTranslatedTicketStatus ne 'Request - Delete' and NonTranslatedTicketStatus ne 'Closed' or (NonTranslatedTicketStatus eq 'Closed' and LastModTimestamp gt 1716433200)) and (OrgStatus eq 0) and (((AssignedGroupID eq '37' or AssignedGroupID eq '38') and (NonTranslatedTicketStatus eq 'New' or NonTranslatedTicketStatus eq 'Active' or NonTranslatedTicketStatus eq 'Queued') and (TypeName eq 'incident') and (TicketAgingRange eq '0-2 days'))))";
+        String apiUrl = credentials.getAPI_URL();
         ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
-
         String json = response.getBody();
 
+        RemoveJsonObject removeJsonObject = new RemoveJsonObject();
+        String newJson = removeJsonObject.removeJsonObject(json);
+
         Gson gson = new Gson();
-        Return returnData = gson.fromJson(json, Return.class);
+        Return returnData = gson.fromJson(newJson, Return.class);
 
         StringBuilder messageBuilder = new StringBuilder();
-        messageBuilder.append("\uD83E\uDD16 Incident Monitoring Bot\n");
-        if (returnData != null) {
 
-            if (returnData.data().items().size() > 1) {
-                messageBuilder.append("⚠\uFE0F Chamados ativos identificados! ⚠\uFE0F\n");
-            } else {
-                messageBuilder.append("⚠\uFE0F Chamado ativo identificado! ⚠\uFE0F\n");
+        if (!returnData.data().items().isEmpty()) {
+
+            messageBuilder.append("\uD83E\uDD16 Incident Monitoring Bot\n");
+
+            int cont = 0;
+            for (var item : returnData.data().items()) {
+                if (item != null) {
+                    cont++;
+                }
             }
+
+            messageBuilder.append("⚠️ ").append(cont > 1 ? "Novos chamados identificados!" : "Novo chamado identificado!").append(" ⚠️\n");
 
             for (var item : returnData.data().items()) {
                 String ticketIdentifier = item.TicketIdentifier();
@@ -51,10 +61,8 @@ public class ServiceaidService {
                         .append("Status: ").append(ticketStatus).append("\n")
                         .append("Solicitante: ").append(creationUserName).append("\n")
                         .append("Descrição: ").append(description)
-                        .append("\n___________________________________________________________________");
+                        .append("\n_______________________________\n");
             }
-        } else {
-            messageBuilder.append("Não foram identificados chamados recentes ativos!!");
         }
         return messageBuilder.toString();
     }
