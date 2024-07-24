@@ -1,12 +1,9 @@
 package com.example.botTelegram;
 
-import com.example.botTelegram.service.ServiceaidService;
+import com.example.botTelegram.service.ServiceaideService;
 import com.example.botTelegram.utis.RobotData;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -23,11 +20,11 @@ public class SendMessageTask implements Runnable {
 
     @Override
     public void run() {
-        ServiceaidService serviceaidService = new ServiceaidService();
+        ServiceaideService serviceaideService = new ServiceaideService();
         String response;
 
         try {
-            response = serviceaidService.getIncidents();
+            response = serviceaideService.getIncidents();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
