@@ -13,10 +13,10 @@ public class RemoveJsonObject {
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
         JsonArray itemsArray = jsonObject.getAsJsonObject("data").getAsJsonArray("items");
 
-        // Cria um novo JsonArray para armazenar itens que não estão com a “Phase” igual a “Em atendimento”
+        // Cria um novo JsonArray para armazenar itens que não estão com o “ReasonCode” igual a “Chamado assumido”
         JsonArray filteredItemsArray = new JsonArray();
 
-        // Itera sobre os itens que não estão com a “ReasonCode” igual a “Chamado assumido” ao novo array
+        // Itera sobre os itens que não estão com o “ReasonCode” igual a “Chamado assumido” ao novo array
         for (JsonElement item : itemsArray) {
             JsonObject itemObject = item.getAsJsonObject();
             if (!itemObject.has("ReasonCode") && !itemObject.get("ReasonCode").getAsString().equals("Chamado assumido")) {
