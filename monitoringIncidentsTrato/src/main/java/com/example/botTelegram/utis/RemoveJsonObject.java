@@ -16,18 +16,16 @@ public class RemoveJsonObject {
         // Cria um novo JsonArray para armazenar itens que não estão com a “Phase” igual a “Em atendimento”
         JsonArray filteredItemsArray = new JsonArray();
 
-        // Itera sobre os itens que não estão com a “Phase” igual a “Em atendimento” ao novo array
+        // Itera sobre os itens que não estão com a “ReasonCode” igual a “Chamado assumido” ao novo array
         for (JsonElement item : itemsArray) {
             JsonObject itemObject = item.getAsJsonObject();
-            if (!itemObject.has("Phase") && !itemObject.get("Phase").getAsString().equals("Em atendimento")) {
+            if (!itemObject.has("ReasonCode") && !itemObject.get("ReasonCode").getAsString().equals("Chamado assumido")) {
                 filteredItemsArray.add(itemObject);
             }
         }
 
         // Substitue a matriz de itens original pela filtrada
         jsonObject.getAsJsonObject("data").add("items", filteredItemsArray);
-
-        jsonObject.getAsJsonObject(null);
 
         return jsonObject.toString();
     }

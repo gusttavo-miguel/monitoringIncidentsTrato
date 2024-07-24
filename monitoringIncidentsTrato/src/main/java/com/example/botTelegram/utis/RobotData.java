@@ -7,5 +7,5 @@ public class RobotData {
     public static final String BOT_USER_NAME = "Incident_Monitoring_Bot";
     public static final String BOT_TOKEN = "7276153917:AAG4dSeUXoksGeRV7CQOsVs37VLzyQF915Q";
     public static final String CHAT_ID = "1441191841"; // ChatID do chat privado do Gustavo Miguel
-//    public static final String CHAT_ID = "-4274920357"; //ChatID do grupo Monitoramento Trato Resolve
+//    public static final String CHAT_ID = "-4234234894"; //ChatID do grupo Monitoramento Trato Resolve
 }
