@@ -1,4 +1,4 @@
-package com.example.botTelegram.utis.serviceaideData;
+package com.accenture.vli.trato.utis.serviceaideData;
 
 import lombok.Getter;
 

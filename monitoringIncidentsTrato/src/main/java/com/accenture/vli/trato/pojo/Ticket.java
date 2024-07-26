@@ -1,4 +1,4 @@
-package com.example.botTelegram.pojo;
+package com.accenture.vli.trato.pojo;
 
 public record Ticket(
         String CreationTimestam,

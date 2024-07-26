@@ -1,4 +1,4 @@
-package com.example.botTelegram;
+package com.accenture.vli.trato;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;

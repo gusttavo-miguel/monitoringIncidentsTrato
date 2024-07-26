@@ -1,7 +1,7 @@
-package com.example.botTelegram;
+package com.accenture.vli.trato;
 
-import com.example.botTelegram.service.ServiceaideService;
-import com.example.botTelegram.utis.RobotData;
+import com.accenture.vli.trato.utis.RobotData;
+import com.accenture.vli.trato.service.ServiceaideService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.concurrent.Executors;

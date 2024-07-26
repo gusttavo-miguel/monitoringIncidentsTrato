@@ -1,4 +1,4 @@
-package com.example.botTelegram.utis;
+package com.accenture.vli.trato.utis;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -19,7 +19,7 @@ public class RemoveJsonObject {
         // Itera sobre os itens que não estão com o “ReasonCode” igual a “Chamado assumido” ao novo array
         for (JsonElement item : itemsArray) {
             JsonObject itemObject = item.getAsJsonObject();
-            if (!itemObject.has("ReasonCode") && !itemObject.get("ReasonCode").getAsString().equals("Chamado assumido")) {
+            if (!itemObject.get("ReasonCode").getAsString().contentEquals("Chamado assumido")) {
                 filteredItemsArray.add(itemObject);
             }
         }

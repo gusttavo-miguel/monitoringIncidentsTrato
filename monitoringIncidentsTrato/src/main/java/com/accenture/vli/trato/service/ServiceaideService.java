@@ -1,8 +1,8 @@
-package com.example.botTelegram.service;
+package com.accenture.vli.trato.service;
 
-import com.example.botTelegram.pojo.Return;
-import com.example.botTelegram.utis.RemoveJsonObject;
-import com.example.botTelegram.utis.serviceaideData.Credentials;
+import com.accenture.vli.trato.pojo.Return;
+import com.accenture.vli.trato.utis.RemoveJsonObject;
+import com.accenture.vli.trato.utis.serviceaideData.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import org.springframework.http.HttpHeaders;
