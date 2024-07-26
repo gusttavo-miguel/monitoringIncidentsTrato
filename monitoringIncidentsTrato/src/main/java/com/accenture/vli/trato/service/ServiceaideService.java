@@ -40,12 +40,12 @@ public class ServiceaideService {
             return "";
         }
 
-        var messageBuilder = new StringBuilder("\uD83E\uDD16 Incident Monitoring Bot\n");
+        var messageBuilder = new StringBuilder();
 
         var incidentCount = items.stream().filter(item -> item != null).count();
         messageBuilder.append("⚠️ ")
                 .append(incidentCount > 1 ? "Novos chamados identificados!" : "Novo chamado identificado!")
-                .append(" ⚠️\n");
+                .append("\n");
 
         items.stream()
                 .filter(item -> item != null)
