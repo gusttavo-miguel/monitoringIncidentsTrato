@@ -42,14 +42,33 @@ public class ServiceaideService {
 
         var messageBuilder = new StringBuilder();
 
-        var incidentCount = items.stream().filter(item -> item != null).count();
-        messageBuilder.append("⚠️ ")
-                .append(incidentCount > 1 ? "Novos chamados identificados!" : "Novo chamado identificado!")
-                .append("\n");
+        var responseReceived = items.stream().filter(item -> item.ReasonCode().equals("Resposta recebida"));
+        var responseReceivedCount = responseReceived.count();
 
         items.stream()
-                .filter(item -> item != null)
+                .filter(item -> item.ReasonCode().equals("Resposta recebida"))
                 .forEach(item -> {
+                    messageBuilder.append("⚠️ ")
+                            .append(responseReceivedCount > 1 ? "Respostas recebidas" : "Resposta recebida")
+                            .append("\n");
+
+                    messageBuilder.append("\n")
+                            .append("Número do chamado: ").append(item.TicketIdentifier()).append("\n")
+                            .append("Solicitante: ").append(item.CreationUserName()).append("\n")
+                            .append("Descrição: ").append(item.Description()).append("\n\n")
+                            .append("Último Histórico de atividade: ").append(item.LastWorklog())
+                            .append("\n_______________________________\n");
+
+                });
+
+        var incidentCount = items.stream().filter(item -> item != null).count();
+        items.stream()
+                .filter(item -> !item.ReasonCode().equals("Resposta recebida"))
+                .forEach(item -> {
+                    messageBuilder.append("⚠️ ")
+                            .append(incidentCount > 1 ? "Novos chamados identificados!" : "Novo chamado identificado!")
+                            .append("\n");
+
                     messageBuilder.append("\n")
                             .append("Número do chamado: ").append(item.TicketIdentifier()).append("\n")
                             .append("Status: ").append(item.TicketStatus()).append("\n")

@@ -1,8 +1,5 @@
 package com.accenture.vli.trato.utis.serviceaideData;
 
-import lombok.Getter;
-
-@Getter
 public class Credentials {
     private static final String CSM_APP_URL = "https://csm3.serviceaide.com";
     private static final String USER_AUTH_TOKEN = "apiusertokenslicetoken40285";
