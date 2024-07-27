@@ -1,6 +1,6 @@
-package com.accenture.vli.trato.utis.serviceaideData;
+package com.accenture.vli.trato.credentials;
 
-public class Credentials {
+public class ServiceaideData {
     private static final String CSM_APP_URL = "https://csm3.serviceaide.com";
     private static final String USER_AUTH_TOKEN = "apiusertokenslicetoken40285";
     private static final String SLICE_TOKEN = "VbxiZZ1IpsGe5T7L_l.t-Ho68629aCgt";

@@ -1,66 +1,57 @@
 package com.accenture.vli.trato;
 
-import com.accenture.vli.trato.utis.RobotData;
+import com.accenture.vli.trato.credentials.RobotData;
 import com.accenture.vli.trato.service.ServiceaideService;
+import com.accenture.vli.trato.utis.FilterAndFormatMessage;
 import com.fasterxml.jackson.core.JsonProcessingException;
-
+import java.time.LocalTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class SendMessageTask implements Runnable {
 
-    private final Bot bot;
+    private final TelegramBot bot;
     private final String chatId;
 
-    public SendMessageTask(Bot bot, String chatId) {
+    public SendMessageTask(TelegramBot bot, String chatId) {
         this.bot = bot;
         this.chatId = chatId;
     }
 
     @Override
     public void run() {
-        ServiceaideService serviceaideService = new ServiceaideService();
-        String response;
+        LocalTime now = LocalTime.now();
+        LocalTime start = LocalTime.of(7, 0); // 07:00
+        LocalTime end = LocalTime.of(23, 45);  // 18:00
 
-        try {
-            response = serviceaideService.getIncidents();
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+        if (now.isAfter(start) && now.isBefore(end)) {
+            ServiceaideService serviceaideService = new ServiceaideService();
+            String json;
+            try {
+                json = serviceaideService.getIncidents();
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
+            }
 
-        if (!response.isEmpty()){
-            bot.sendMessage(chatId, response);
+            FilterAndFormatMessage filterAndFormatMessage = new FilterAndFormatMessage();
+            var messageForTelegram = filterAndFormatMessage.filterAndFormatMessage(json);
+
+            if (!messageForTelegram.isEmpty()) {
+                bot.sendMessage(chatId, messageForTelegram);
+            }
         }
     }
 
-//    @Override
-//    public void run() {
-//        LocalTime now = LocalTime.now();
-//        LocalTime start = LocalTime.of(7, 0); // 07:00
-//        LocalTime end = LocalTime.of(18, 0);  // 18:00
-//
-//        if (now.isAfter(start) && now.isBefore(end)) {
-//            ServiceaidService serviceaidService = new ServiceaidService();
-//            String response;
-//            try {
-//                response = serviceaidService.getIncidents();
-//                bot.sendMessage(chatId, response);
-//            } catch (JsonProcessingException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
-//    }
-
     public static void main(String[] args) {
 
-        Bot bot = new Bot(RobotData.BOT_TOKEN, RobotData.BOT_TOKEN);
+        TelegramBot telegramBot = new TelegramBot(RobotData.BOT_TOKEN, RobotData.BOT_TOKEN);
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        SendMessageTask task = new SendMessageTask(bot, RobotData.CHAT_ID);
+        SendMessageTask sendMessageTask = new SendMessageTask(telegramBot, RobotData.CHAT_ID);
 
         long initialDelay = 0L; // atraso inicial
         long period = 5L; // período em minutos
 
-        scheduler.scheduleAtFixedRate(task, initialDelay, period, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(sendMessageTask, initialDelay, period, TimeUnit.MINUTES);
     }
 }

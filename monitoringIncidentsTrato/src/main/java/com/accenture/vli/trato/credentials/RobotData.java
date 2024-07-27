@@ -1,4 +1,4 @@
-package com.accenture.vli.trato.utis;
+package com.accenture.vli.trato.credentials;
 
 // Método criado para armazenar em variáveis constantes as credencias do bot
 public class RobotData {
