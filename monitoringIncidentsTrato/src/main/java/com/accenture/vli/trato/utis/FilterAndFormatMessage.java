@@ -28,11 +28,12 @@ public class FilterAndFormatMessage {
                             .append("Solicitante: ").append(item.CreationUserName()).append("\n")
                             .append("Descrição: ").append(item.Description()).append("\n\n")
                             .append("Último Histórico de atividade: ").append(item.LastWorklog())
-                            .append("\n_______________________________\n");
+                            .append("\n\n_______________________________\n\n");
 
                 });
 
         var incidentCount = items.stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") || item.ReasonCode().equalsIgnoreCase("Novo chamado")).count();
+        Dicionary dicionary = new Dicionary();
         items.stream()
                 .filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") || item.ReasonCode().equalsIgnoreCase("Novo chamado"))
                 .forEach(item -> {
@@ -42,10 +43,10 @@ public class FilterAndFormatMessage {
 
                     messageBuilder.append("\n")
                             .append("Número do chamado: ").append(item.TicketIdentifier()).append("\n")
-                            .append("Status: ").append(item.TicketStatus()).append("\n")
+                            .append("Status: ").append(dicionary.translateToPortuguese(item.TicketStatus())).append("\n")
                             .append("Solicitante: ").append(item.CreationUserName()).append("\n")
                             .append("Descrição: ").append(item.Description())
-                            .append("\n_______________________________\n");
+                            .append("\n\n_______________________________\n\n");
                 });
         return messageBuilder.toString();
     }
