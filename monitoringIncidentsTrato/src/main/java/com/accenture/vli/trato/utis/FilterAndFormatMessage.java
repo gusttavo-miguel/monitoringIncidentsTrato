@@ -20,7 +20,7 @@ public class FilterAndFormatMessage {
                 .filter(item -> item.ReasonCode().equalsIgnoreCase("Resposta recebida"))
                 .forEach(item -> {
                     messageBuilder.append("⚠️ ")
-                            .append(responseReceivedCount > 1 ? "Respostas recebidas" : "Resposta recebida")
+                            .append(responseReceivedCount > 1 ? "Respostas recebidas!" : "Resposta recebida!")
                             .append("\n");
 
                     messageBuilder.append("\n")

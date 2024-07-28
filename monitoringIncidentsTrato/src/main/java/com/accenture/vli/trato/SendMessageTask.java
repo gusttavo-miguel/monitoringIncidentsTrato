@@ -46,7 +46,7 @@ public class SendMessageTask implements Runnable {
         SendMessageTask sendMessageTask = new SendMessageTask(telegramBot, RobotData.CHAT_ID);
 
         long initialDelay = 0L; // atraso inicial
-        long period = 15L; // período em minutos
+        long period = 5L; // período em minutos
 
         scheduler.scheduleAtFixedRate(sendMessageTask, initialDelay, period, TimeUnit.MINUTES);
     }
