@@ -6,12 +6,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 public class ServiceaideService {
 
@@ -33,10 +27,7 @@ public class ServiceaideService {
         ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.GET, entity, String.class);
 
         return response.getBody();
-
     }
-
-
 
 //    public String getIncidents() throws IOException, InterruptedException {
 //        ServiceaideData serviceaideData = new ServiceaideData();
