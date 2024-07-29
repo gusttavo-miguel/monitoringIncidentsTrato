@@ -3,9 +3,6 @@ package com.accenture.vli.trato;
 import com.accenture.vli.trato.credentials.RobotData;
 import com.accenture.vli.trato.service.ServiceaideService;
 import com.accenture.vli.trato.utis.FilterAndFormatMessage;
-import com.fasterxml.jackson.core.JsonProcessingException;
-
-import java.io.IOException;
 import java.time.LocalTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

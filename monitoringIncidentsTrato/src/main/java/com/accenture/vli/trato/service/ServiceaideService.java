@@ -28,36 +28,4 @@ public class ServiceaideService {
 
         return response.getBody();
     }
-
-//    public String getIncidents() throws IOException, InterruptedException {
-//        ServiceaideData serviceaideData = new ServiceaideData();
-//
-//        // Validação da URL
-//        URI apiUri;
-//        try {
-//            apiUri = new URI(serviceaideData.getAPI_URL());
-//        } catch (URISyntaxException e) {
-//            throw new IllegalArgumentException("URL da API inválida: " + serviceaideData.getAPI_URL(), e);
-//        }
-//
-//        // Cria um cliente HTTP
-//        HttpClient client = HttpClient.newHttpClient();
-//
-//        // Constrói a requisição com os cabeçalhos
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(apiUri)
-//                .header("csm_app_url", serviceaideData.getCSM_APP_URL())
-//                .header("user_auth_token", serviceaideData.getUSER_AUTH_TOKEN())
-//                .header("slice_token", serviceaideData.getSLICE_TOKEN())
-//                .header("webservice_user_name", serviceaideData.getWEBSERVICE_USER_NAME())
-//                .header("webservice_user_password", serviceaideData.getWEBSERVICE_USER_PASSWORD())
-//                .GET()
-//                .build();
-//
-//        // Envia a requisição e recebe a resposta
-//        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-//
-//        // Retorna o corpo da resposta
-//        return response.body();
-//    }
 }
