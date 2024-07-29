@@ -31,7 +31,7 @@ public class FilterAndFormatMessage {
                             .append("Solicitante: ").append(item.CreationUserName()).append("\n")
                             .append("Descrição: ").append(item.Description()).append("\n\n")
                             .append("Último Histórico de atividade: ").append(item.LastWorklog())
-                            .append("\n\n_______________________________\n\n");
+                            .append("\n_______________________________\n");
 
                 });
 
@@ -51,7 +51,7 @@ public class FilterAndFormatMessage {
                             .append("Status: ").append(dicionary.translateToPortuguese(item.TicketStatus())).append("\n")
                             .append("Solicitante: ").append(item.CreationUserName()).append("\n")
                             .append("Descrição: ").append(item.Description())
-                            .append("\n\n_______________________________\n\n");
+                            .append("\n_______________________________\n");
                 });
         return messageBuilder.toString();
     }
