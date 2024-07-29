@@ -8,11 +8,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpHeaders;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class ServiceaideService {
 
@@ -38,10 +40,13 @@ public class ServiceaideService {
         // Cria um HttpClient
         HttpClient client = HttpClient.newHttpClient();
         var serviceaideData = new ServiceaideData();
+
+        var filter = URLEncoder.encode(serviceaideData.getFILTER(), StandardCharsets.UTF_8);
+
         // Cria a requisição com o header
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(serviceaideData.getAPI_URL()))
-//                .uri(URI.create("https://api.exemplo.com/endpoint"))
+//                .uri(URI.create(serviceaideData.getAPI_URL()))
+                .uri(URI.create(serviceaideData.getAPI_URL_PATH().concat(filter)))
                 .header("Content-Type", "application/json")
                 .header("csm_app_url", serviceaideData.getCSM_APP_URL())
                 .header("user_auth_token", serviceaideData.getUSER_AUTH_TOKEN())

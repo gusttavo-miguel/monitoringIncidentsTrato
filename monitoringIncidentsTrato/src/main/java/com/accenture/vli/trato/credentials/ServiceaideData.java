@@ -40,4 +40,12 @@ public class ServiceaideData {
     public String getAPI_URL() {
         return API_URL;
     }
+
+    public String getFILTER() {
+        return FILTER;
+    }
+    public String getAPI_URL_PATH() {
+        return API_URL_PATH;
+    }
+
 }
