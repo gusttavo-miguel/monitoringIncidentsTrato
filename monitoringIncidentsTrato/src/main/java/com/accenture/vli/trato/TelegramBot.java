@@ -9,10 +9,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     private final String botToken;
     private final String botUsername;
+    private final String chatId;
 
-    public TelegramBot(String botToken, String botUsername) {
+    public TelegramBot(String botToken, String botUsername, String chatId) {
         this.botToken = botToken;
         this.botUsername = botUsername;
+        this.chatId = chatId;
     }
 
     @Override
@@ -30,7 +32,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         // Lógica para tratar mensagens recebidas ( se necessário )
     }
 
-    public void sendMessage(String chatId, String text) {
+    public void sendMessage(String text) {
         var message = new SendMessage();
         message.setChatId(chatId);
         message.setText(text);

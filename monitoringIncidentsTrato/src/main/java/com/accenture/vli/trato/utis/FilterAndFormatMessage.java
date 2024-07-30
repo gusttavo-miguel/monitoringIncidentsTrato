@@ -16,12 +16,15 @@ public class FilterAndFormatMessage {
         var messageBuilder = new StringBuilder();
         var responseReceivedCount = items.stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Resposta recebida")).count();
 
+        if(responseReceivedCount != 0){
+            messageBuilder.append("⚠️ ")
+                    .append(responseReceivedCount > 1 ? "Respostas recebidas!" : "Resposta recebida!")
+                    .append("\n");
+        }
+
         items.stream()
                 .filter(item -> item.ReasonCode().equalsIgnoreCase("Resposta recebida"))
                 .forEach(item -> {
-                    messageBuilder.append("⚠️ ")
-                            .append(responseReceivedCount > 1 ? "Respostas recebidas" : "Resposta recebida")
-                            .append("\n");
 
                     messageBuilder.append("\n")
                             .append("Número do chamado: ").append(item.TicketIdentifier()).append("\n")
@@ -32,17 +35,22 @@ public class FilterAndFormatMessage {
 
                 });
 
-        var incidentCount = items.stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") || item.ReasonCode().equalsIgnoreCase("Novo chamado")).count();
+        var incidentCount = items.stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") | item.ReasonCode().equalsIgnoreCase("Novo chamado")).count();
+
+        if(incidentCount != 0){
+            messageBuilder.append("⚠️ ")
+                    .append(incidentCount > 1 ? "Novos chamados identificados!" : "Novo chamado identificado!")
+                    .append("\n");
+        }
+
+        Dicionary dicionary = new Dicionary();
         items.stream()
-                .filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") || item.ReasonCode().equalsIgnoreCase("Novo chamado"))
+                .filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") | item.ReasonCode().equalsIgnoreCase("Novo chamado"))
                 .forEach(item -> {
-                    messageBuilder.append("⚠️ ")
-                            .append(incidentCount > 1 ? "Novos chamados identificados!" : "Novo chamado identificado!")
-                            .append("\n");
 
                     messageBuilder.append("\n")
                             .append("Número do chamado: ").append(item.TicketIdentifier()).append("\n")
-                            .append("Status: ").append(item.TicketStatus()).append("\n")
+                            .append("Status: ").append(dicionary.translateToPortuguese(item.TicketStatus())).append("\n")
                             .append("Solicitante: ").append(item.CreationUserName()).append("\n")
                             .append("Descrição: ").append(item.Description())
                             .append("\n_______________________________\n");
