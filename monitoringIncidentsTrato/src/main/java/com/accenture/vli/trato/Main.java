@@ -3,14 +3,14 @@ package com.accenture.vli.trato;
 import com.accenture.vli.trato.credentials.RobotData;
 import com.accenture.vli.trato.service.ServiceaideService;
 import com.accenture.vli.trato.utis.FilterAndFormatMessage;
+import com.google.cloud.functions.HttpFunction;
+import com.google.cloud.functions.HttpRequest;
+import com.google.cloud.functions.HttpResponse;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
+public class Main implements HttpFunction {
 
-public class Main {
-
-    public static void main(String[] args) throws IOException, URISyntaxException {
-
+    @Override
+    public void service(HttpRequest httpRequest, HttpResponse httpResponse) throws Exception {
         TelegramBot telegramBot = new TelegramBot(RobotData.BOT_TOKEN, RobotData.BOT_USER_NAME, RobotData.CHAT_ID);
         ServiceaideService serviceaideService = new ServiceaideService();
 
@@ -20,7 +20,7 @@ public class Main {
         var messageForTelegram = filterAndFormatMessage.filterAndFormatMessage(json);
 
         if (!messageForTelegram.isEmpty()) {
-           telegramBot.sendMessage(messageForTelegram);
+            telegramBot.sendMessage(messageForTelegram);
         }
     }
 }
