@@ -2,10 +2,6 @@ package com.accenture.vli.trato.credentials;
 
 public class ServiceaideData {
     private static final String CSM_APP_URL = "https://csm3.serviceaide.com";
-    private static final String USER_AUTH_TOKEN = "apiusertokenslicetoken40285";
-    private static final String SLICE_TOKEN = "VbxiZZ1IpsGe5T7L_l.t-Ho68629aCgt";
-    private static final String WEBSERVICE_USER_NAME = "wsIncidentes@serviceaide.trato";
-    private static final String WEBSERVICE_USER_PASSWORD = "vD7@6!Hcx1";
     private static final String API_URL_PATH = "https://csm3.serviceaide.com/csmconnector/Ticket";
     private static final String FILTER = "?filter=((NonTranslatedTicketStatus ne 'Archive' " +
             "and NonTranslatedTicketStatus ne 'Request - Delete' " +
@@ -21,31 +17,7 @@ public class ServiceaideData {
         return CSM_APP_URL;
     }
 
-    public String getUSER_AUTH_TOKEN() {
-        return USER_AUTH_TOKEN;
-    }
-
-    public String getSLICE_TOKEN() {
-        return SLICE_TOKEN;
-    }
-
-    public String getWEBSERVICE_USER_NAME() {
-        return WEBSERVICE_USER_NAME;
-    }
-
-    public String getWEBSERVICE_USER_PASSWORD() {
-        return WEBSERVICE_USER_PASSWORD;
-    }
-
     public String getAPI_URL() {
         return API_URL;
     }
-
-    public String getFILTER() {
-        return FILTER;
-    }
-    public String getAPI_URL_PATH() {
-        return API_URL_PATH;
-    }
-
 }
