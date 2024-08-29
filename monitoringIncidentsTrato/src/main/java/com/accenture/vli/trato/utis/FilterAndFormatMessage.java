@@ -8,13 +8,13 @@ public class FilterAndFormatMessage {
     public String filterAndFormatMessage(String json) {
         var returnData = new Gson().fromJson(json, Return.class);
 
-        var items = returnData.data().items();
-        if (items.isEmpty()) {
-            return "";
+        var data = returnData.data();
+        if (data == null) {
+            return "Teste";
         }
 
         var messageBuilder = new StringBuilder();
-        var responseReceivedCount = items.stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Resposta recebida")).count();
+        var responseReceivedCount = data.items().stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Resposta recebida")).count();
 
         if(responseReceivedCount != 0){
             messageBuilder.append("⚠️ ")
@@ -22,7 +22,7 @@ public class FilterAndFormatMessage {
                     .append("\n");
         }
 
-        items.stream()
+        data.items().stream()
                 .filter(item -> item.ReasonCode().equalsIgnoreCase("Resposta recebida"))
                 .forEach(item -> {
 
@@ -35,7 +35,7 @@ public class FilterAndFormatMessage {
 
                 });
 
-        var incidentCount = items.stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") | item.ReasonCode().equalsIgnoreCase("Novo chamado")).count();
+        var incidentCount = data.items().stream().filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") | item.ReasonCode().equalsIgnoreCase("Novo chamado")).count();
 
         if(incidentCount != 0){
             messageBuilder.append("⚠️ ")
@@ -44,7 +44,7 @@ public class FilterAndFormatMessage {
         }
 
         Dicionary dicionary = new Dicionary();
-        items.stream()
+        data.items().stream()
                 .filter(item -> item.ReasonCode().equalsIgnoreCase("Atribuído ao grupo") | item.ReasonCode().equalsIgnoreCase("Novo chamado"))
                 .forEach(item -> {
 
