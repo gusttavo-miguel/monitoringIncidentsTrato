@@ -10,7 +10,7 @@ public class FilterAndFormatMessage {
 
         var data = returnData.data();
         if (data == null) {
-            return "Teste";
+            return "";
         }
 
         var messageBuilder = new StringBuilder();
